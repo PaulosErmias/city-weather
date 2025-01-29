@@ -1,4 +1,5 @@
 import { ErrorComponent } from "@/components/ErrorComponent";
+import { LoadingComponent } from "@/components/LoadingComponent";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/store";
@@ -11,21 +12,20 @@ export default function CityWeather() {
   const { data, loading, error } = useAppSelector((state) => state.weather);
 
   useEffect(() => {
-    if (city) {
-      dispatch(fetchWeather(city as string));
-    }
+    const fetchData = async () => {
+      if (city) {
+        try {
+          await dispatch(fetchWeather(city as string)).unwrap();
+        } catch (error) {
+          // Error handled by Redux
+        }
+      }
+    };
+
+    fetchData();
   }, [city, dispatch]);
 
-  if (loading)
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center">
-        <div className="animate-pulse flex flex-col items-center">
-          <div className="h-24 w-24 bg-gray-200 rounded-full mb-4"></div>
-          <div className="h-8 bg-gray-200 rounded w-48 mb-4"></div>
-          <div className="h-6 bg-gray-200 rounded w-32"></div>
-        </div>
-      </div>
-    );
+  if (loading) return <LoadingComponent />;
 
   if (error)
     return (
