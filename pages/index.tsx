@@ -32,7 +32,7 @@ export default function Home() {
         <div className="bg-white/20 backdrop-blur-lg rounded-2xl shadow-xl w-full max-w-md transform transition-all hover:shadow-2xl">
           <form onSubmit={handleSearch} className="p-8">
             <h1 className="text-3xl font-bold text-gray-800 mb-6 text-center">
-              Weather Glass
+              City Weather
             </h1>
 
             <div className="space-y-4">

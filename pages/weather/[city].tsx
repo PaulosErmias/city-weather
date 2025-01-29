@@ -1,7 +1,7 @@
 import { ErrorComponent } from "@/components/ErrorComponent";
 import { LoadingComponent } from "@/components/LoadingComponent";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/store";
 import { fetchWeather } from "../../store/weatherSlice";
 
@@ -10,6 +10,11 @@ export default function CityWeather() {
   const { city } = router.query;
   const dispatch = useAppDispatch();
   const { data, loading, error } = useAppSelector((state) => state.weather);
+  const [unit, setUnit] = useState<"C" | "F">("C");
+
+  const convertTemp = (temp: number) => {
+    return unit === "C" ? temp : (temp * 9) / 5 + 32;
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,13 +44,24 @@ export default function CityWeather() {
       <div className="bg-white/10 backdrop-blur-lg rounded-3xl shadow-xl w-full max-w-2xl p-8 transform transition-all hover:shadow-2xl">
         {/* Header Section */}
         <div className="flex justify-between items-start mb-8">
-          <div>
-            <h1 className="text-4xl font-bold text-gray-800 mb-2">
-              {data?.name}
-            </h1>
-            <p className="text-xl text-gray-600">
-              {data?.weather[0]?.description}
-            </p>
+          <div className="flex items-start gap-10">
+            <div>
+              <h1 className="text-4xl font-bold text-gray-800 mb-2">
+                {data?.name}
+              </h1>
+              <p className="text-xl text-gray-600">
+                {data?.weather[0]?.description}
+              </p>
+            </div>
+
+            <div className="flex items-center gap-4">
+              <button
+                onClick={() => setUnit((prev) => (prev === "C" ? "F" : "C"))}
+                className="bg-white/20 px-4 py-2 rounded-full backdrop-blur-sm hover:bg-white/30 transition-all"
+              >
+                °{unit}
+              </button>
+            </div>
           </div>
           <img
             src={`http://openweathermap.org/img/wn/${data?.weather[0]?.icon}@4x.png`}
@@ -58,7 +74,7 @@ export default function CityWeather() {
         <div className="bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-2xl p-6 mb-8 text-center">
           <p className="text-sm mb-2">Current Temperature</p>
           <div className="text-6xl font-bold">
-            {Math.round(data?.main?.temp)}°C
+            {Math.round(convertTemp(data?.main?.temp))}°{unit}
           </div>
         </div>
 
@@ -76,10 +92,11 @@ export default function CityWeather() {
               {data?.wind?.speed} m/s
             </p>
           </div>
-          <div className="bg-white/20 backdrop-blur-sm rounded-xl p-4 text-center hover:bg-white/30 transition-all">
+          {/* feels like card */}
+          <div className="bg-white/20 backdrop-blur-sm rounded-xl p-4 text-center">
             <p className="text-gray-600 mb-1">Feels Like</p>
             <p className="text-2xl font-bold text-gray-800">
-              {Math.round(data?.main?.feels_like)}°C
+              {Math.round(convertTemp(data?.main?.feels_like))}°{unit}
             </p>
           </div>
         </div>
