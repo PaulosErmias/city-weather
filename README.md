@@ -52,6 +52,7 @@ Framework: Next.js 13
 . HTTP Client: Axios
 . Type Checking: TypeScript
 
+``git
 📂 Project Structure
 UI Components: Custom animated SVG elements
 ├── store/
@@ -65,13 +66,7 @@ UI Components: Custom animated SVG elements
 │   └── LoadingComponent.tsx # Animated spinner
 ├── services/             # API service layer
 └── public/               # Static assets
-
-Screenshots
-
-![image](https://github.com/user-attachments/assets/9433cfa0-67ec-41c0-b249-da6833ac0644)
-![image](https://github.com/user-attachments/assets/44ae8ebd-0a10-4827-bdc0-01b221cd376e)
-![image](https://github.com/user-attachments/assets/ab09563e-5c94-493c-8c2e-05b19b56ff8f)
-![image](https://github.com/user-attachments/assets/aabe0c06-8173-49c1-b41e-e3bc2c9d92d9)
+``git
 
 🔍 Key Implementation Highlights
 1. Efficient State Management
