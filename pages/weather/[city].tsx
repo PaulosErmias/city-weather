@@ -1,7 +1,7 @@
 import { ErrorComponent } from "@/components/ErrorComponent";
-import { LoadingComponent } from "@/components/LoadingComponent";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { LoadingComponent } from "../../src/components/LoadingComponent";
 import { useAppDispatch, useAppSelector } from "../../store/store";
 import { fetchWeather } from "../../store/weatherSlice";
 
@@ -30,7 +30,14 @@ export default function CityWeather() {
     fetchData();
   }, [city, dispatch]);
 
-  if (loading) return <LoadingComponent />;
+  if (loading)
+    return (
+      <div className="min-h-[50vh] w-full">
+        {" "}
+        {/* Ensure minimum height */}
+        <LoadingComponent />
+      </div>
+    );
 
   if (error)
     return (
