@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/d94589fa-1001-495c-a6ce-eb5eea0fc7bf)# Weather Dashboard Challenge
+![image](https://github.com/user-attachments/assets/44ae8ebd-0a10-4827-bdc0-01b221cd376e)
 
 [![Next.js](https://img.shields.io/badge/Next.js-13.5-blue?logo=next.js)](https://nextjs.org/)
 [![Redux](https://img.shields.io/badge/Redux_Toolkit-1.9-purple?logo=redux)](https://redux-toolkit.js.org/)
@@ -37,7 +37,6 @@ A weather dashboard built with Next.js and Redux Toolkit that fulfills all requi
 ## 🚀 Installation
 
 1. Clone repository:
-```bash
 git clone https://github.com/your-username/weather-dashboard.git
 2. Install dependencies:
 npm install
